@@ -1,0 +1,65 @@
+---
+title: "Presentación Léxico"
+subtitle: ""
+author: "Robert Esposito"
+institute: "Rutgers University"
+date: "2016/12/12 (updated: `r Sys.Date()`)"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["rutgers", "rutgers-fonts"]
+    nature:
+      beforeInit: "http://www.jvcasillas.com/ru_xaringan/js/ru_xaringan.js"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r library, include=FALSE}
+library(rworldmap)
+```
+
+```{r map, echo=FALSE}
+theCountries <- c("DEU", "COD", "BFA")
+# These are the ISO3 names of the countries you'd like to plot in red
+
+malDF <- data.frame(country = c("DEU", "COD", "BFA"),
+  words = c("pomelo", "naranja", "tanjarine"))
+# malDF is a data.frame with the ISO3 country names plus a variable to
+# merge to the map data
+
+malMap <- joinCountryData2Map(malDF, joinCode = "ISO3",
+  nameJoinColumn = "country")
+# This will join your malDF data.frame to the country map data
+
+mapCountryData(malMap, nameColumnToPlot="words", catMethod = "categorical",
+  missingCountryCol = gray(.8), mapRegion="latin america")
+# And this will plot it, with the trick that the color palette's first
+# color is red
+```
+---
+```{r more-map, echo=FALSE, message=FALSE, warning=FALSE}
+## Create multiple color codes, with Burkina Faso in its own group
+malDF <- data.frame(country = c("DEU", "COD", "BFA"),
+  words = c("naranja", "tangerine", "tangerine"))
+
+## Re-merge
+malMap <- joinCountryData2Map(malDF, joinCode = "ISO3",
+  nameJoinColumn = "country")
+
+## Specify the colourPalette argument
+mapCountryData(malMap, nameColumnToPlot="words", catMethod = "categorical",
+  missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+```
+
+
+
+
+
+
+
