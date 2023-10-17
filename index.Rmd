@@ -18,44 +18,144 @@ output:
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
 ```
 
-```{r library, include=FALSE}
+```{r libraries, include=FALSE}
 library(rworldmap)
+library(dplyr)
+library(here)
+library(tidyverse)
+library(purrr)
+library(knitr)
+library(kableExtra)
 ```
 
-```{r map, echo=FALSE}
-theCountries <- c("DEU", "COD", "BFA")
-# These are the ISO3 names of the countries you'd like to plot in red
+```{r df-minivan, include=FALSE}
+countries <- read.csv(
+  here(
+    "minivan.csv"
+  )
+)
 
-malDF <- data.frame(country = c("DEU", "COD", "BFA"),
-  words = c("pomelo", "naranja", "tanjarine"))
-# malDF is a data.frame with the ISO3 country names plus a variable to
-# merge to the map data
+for(i in 1:ncol(countries)){
+  temp <- data.frame(countries[,i])
+colnames(temp) <- colnames(countries)[i]
+assign(colnames(countries)[i], temp)
+rm(temp)
+}
+```
 
-malMap <- joinCountryData2Map(malDF, joinCode = "ISO3",
-  nameJoinColumn = "country")
-# This will join your malDF data.frame to the country map data
+class: center
+background-image: url("minivan.jpg")
+# Minivan
+---
+.left-column[
+*   
+]
 
-mapCountryData(malMap, nameColumnToPlot="words", catMethod = "categorical",
-  missingCountryCol = gray(.8), mapRegion="latin america")
-# And this will plot it, with the trick that the color palette's first
-# color is red
+.right-column[
+```{r maps-minivan, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+
+#re-add country column
+word_miniván <- cbind(word_miniván, countries$country)
+
+#create map object
+minivan_map <- joinCountryData2Map(word_miniván, joinCode = "ISO3", nameJoinColumn = "countries$country")
+
+#visualize map
+mapCountryData(minivan_map, nameColumnToPlot="word_miniván", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+```
+]
+---
+START HERE. ADD TEXT TO LEFT SIDE, MAP TO RIGHT SIDE.
+
+```{r maps-van, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+
+#re-add country column
+word_van <- cbind(word_van, countries$country)
+
+#create map object
+van_map <- joinCountryData2Map(word_van, joinCode = "ISO3", nameJoinColumn = "countries$country")
+
+#visualize map
+mapCountryData(van_map, nameColumnToPlot="word_van", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
 ```
 ---
-```{r more-map, echo=FALSE, message=FALSE, warning=FALSE}
-## Create multiple color codes, with Burkina Faso in its own group
-malDF <- data.frame(country = c("DEU", "COD", "BFA"),
-  words = c("naranja", "tangerine", "tangerine"))
+```{r maps-camioneta, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 
-## Re-merge
-malMap <- joinCountryData2Map(malDF, joinCode = "ISO3",
-  nameJoinColumn = "country")
+#re-add country column
+word_camioneta <- cbind(word_camioneta, countries$country)
 
-## Specify the colourPalette argument
-mapCountryData(malMap, nameColumnToPlot="words", catMethod = "categorical",
-  missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+#create map object
+camioneta_map <- joinCountryData2Map(word_camioneta, joinCode = "ISO3", nameJoinColumn = "countries$country")
+
+#visualize map
+mapCountryData(camioneta_map, nameColumnToPlot="word_camioneta", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
 ```
+---
+
+```{r unique-words-df, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+unique_words <- countries %>% select(
+  country, word_vagoneta, word_yipeta, word_miniblaser, word_camionetilla, word_minicamioneta, word_minibús, word_auto_familiar, word_guagua
+)
+
+unique_words <- unique(unique_words)
+
+rownames(unique_words) <- unique_words[,1]
+unique_words[,1] <- NULL
+
+unique_words <- unique_words[!apply(is.na(unique_words) | unique_words == "", 1, all),]
+```
+
+```{r table-unique-words, echo=FALSE, message=FALSE, warning=FALSE}
+kbl(unique_words, col.names = NULL) %>%
+  kable_paper()
+```
+---
+```{r df-city-bus, include=FALSE}
+city_bus <- read.csv(
+  here(
+    "city_bus.csv"
+  )
+)
+
+for(i in 1:ncol(city_bus)){
+  temp <- data.frame(city_bus[,i])
+colnames(temp) <- colnames(city_bus)[i]
+assign(colnames(city_bus)[i], temp)
+rm(temp)
+}
+```
+
+class: center
+background-image: url("citybus.jpg")
+# City Bus
+---
+
+.right-column[
+```{r maps-bus, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_bus <- cbind(word_bus, city_bus$country)
+
+bus_map <- joinCountryData2Map(word_bus, joinCode = "ISO3", nameJoinColumn = "city_bus$country")
+
+mapCountryData(bus_map, nameColumnToPlot="word_bus", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+
+```
+]
+
+---
+CONTINUE ADDING MAPS HERE, YOU DIDN'T EDIT THIS MAP YET.
+.right-column[
+```{r maps-various, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_bus <- cbind(word_bus, city_bus$country)
+
+bus_map <- joinCountryData2Map(word_bus, joinCode = "ISO3", nameJoinColumn = "city_bus$country")
+
+mapCountryData(bus_map, nameColumnToPlot="word_bus", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+
+```
+]
 
 
 
