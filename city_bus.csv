@@ -15,6 +15,6 @@ SLV,,bus,,,,,autobús,,,
 GTM,,bus,,,,,autobús,camioneta,,
 MEX,,,colectivo,,microbús,,autobús,,camión,
 PRY,,,colectivo,,,,,,,ómnibus
-PER,bus,,,,microbús,,,,,ómnibus
+PER,,bus,,,microbús,,,,,ómnibus
 URY,,,,,,,,,,ómnibus
-VEN,bus,,,,,,autobús,,,
+VEN,,bus,,,,,autobús,,,

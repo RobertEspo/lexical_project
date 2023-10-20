@@ -94,10 +94,22 @@ camioneta_map <- joinCountryData2Map(word_camioneta, joinCode = "ISO3", nameJoin
 mapCountryData(camioneta_map, nameColumnToPlot="word_camioneta", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
 ```
 ---
+```{r maps-camioneta, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+
+#re-add country column
+word_auto_familiar <- cbind(word_auto_familiar, countries$country)
+
+#create map object
+auto_familiar_map <- joinCountryData2Map(word_auto_familiar, joinCode = "ISO3", nameJoinColumn = "countries$country")
+
+#visualize map
+mapCountryData(auto_familiar_map, nameColumnToPlot="word_camioneta", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+```
+---
 
 ```{r unique-words-df, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 unique_words <- countries %>% select(
-  country, word_vagoneta, word_yipeta, word_miniblaser, word_camionetilla, word_minicamioneta, word_minibús, word_auto_familiar, word_guagua
+  country, word_vagoneta, word_yipeta, word_miniblaser, word_camionetilla, word_minicamioneta, word_minibús, word_guagua
 )
 
 unique_words <- unique(unique_words)
