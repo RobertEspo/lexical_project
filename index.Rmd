@@ -1,5 +1,5 @@
 ---
-title: "Presentación Léxico"
+title: "Presentación Léxica"
 subtitle: ""
 author: "Robert Esposito"
 institute: "Rutgers University"
@@ -50,11 +50,23 @@ class: center
 background-image: url("minivan.jpg")
 # Minivan
 ---
-.left-column[
-*   
+# Van y miniván
+.pull-left[
+*   Anglicismo, atestado en Puerto Rico en 1997
+```{r maps-van, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+
+#re-add country column
+word_van <- cbind(word_van, countries$country)
+
+#create map object
+van_map <- joinCountryData2Map(word_van, joinCode = "ISO3", nameJoinColumn = "countries$country")
+
+#visualize map
+mapCountryData(van_map, nameColumnToPlot="word_van", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+```
 ]
 
-.right-column[
+.pull-right[
 ```{r maps-minivan, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 
 #re-add country column
@@ -68,20 +80,13 @@ mapCountryData(minivan_map, nameColumnToPlot="word_miniván", catMethod = "categ
 ```
 ]
 ---
-START HERE. ADD TEXT TO LEFT SIDE, MAP TO RIGHT SIDE.
+# Camioneta y los dimunitivos
+.pull-left[
+*   Uso del dimunitivo es común
+*   furgon*eta*, vagon*eta*, camion*etilla*, minicamion*eta*, yip*eta*
+]
 
-```{r maps-van, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
-
-#re-add country column
-word_van <- cbind(word_van, countries$country)
-
-#create map object
-van_map <- joinCountryData2Map(word_van, joinCode = "ISO3", nameJoinColumn = "countries$country")
-
-#visualize map
-mapCountryData(van_map, nameColumnToPlot="word_van", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
-```
----
+.pull-right[
 ```{r maps-camioneta, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 
 #re-add country column
@@ -93,8 +98,16 @@ camioneta_map <- joinCountryData2Map(word_camioneta, joinCode = "ISO3", nameJoin
 #visualize map
 mapCountryData(camioneta_map, nameColumnToPlot="word_camioneta", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
 ```
+]
 ---
-```{r maps-camioneta, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+# Auto familiar
+.pull-left[
+*   En españa, se escucha también coche familiar
+
+]
+
+.pull-right[
+```{r maps-auto-familiar, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 
 #re-add country column
 word_auto_familiar <- cbind(word_auto_familiar, countries$country)
@@ -103,8 +116,9 @@ word_auto_familiar <- cbind(word_auto_familiar, countries$country)
 auto_familiar_map <- joinCountryData2Map(word_auto_familiar, joinCode = "ISO3", nameJoinColumn = "countries$country")
 
 #visualize map
-mapCountryData(auto_familiar_map, nameColumnToPlot="word_camioneta", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+mapCountryData(auto_familiar_map, nameColumnToPlot="word_auto_familiar", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
 ```
+]
 ---
 
 ```{r unique-words-df, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
@@ -124,54 +138,404 @@ unique_words <- unique_words[!apply(is.na(unique_words) | unique_words == "", 1,
 kbl(unique_words, col.names = NULL) %>%
   kable_paper()
 ```
+*   El prefijo **mini-** p. ej *mini*blaser, *mini*camioneta, *mini*bús
+*   **Miniblaser**: Anglicismo ~ Blazer SUV de Chevrolet (de los años 1960 hasta los años 1990)
+*   **Guagua**: Cualquier vehículo más grande que un sedan
+*   **Yipeta**: Anglicismo ~ diminutivo de 'Jeep'
 ---
 ```{r df-city-bus, include=FALSE}
 city_bus <- read.csv(
   here(
     "city_bus.csv"
-  )
+  ), encoding = "ISO-8859-1"
 )
 
 for(i in 1:ncol(city_bus)){
   temp <- data.frame(city_bus[,i])
-colnames(temp) <- colnames(city_bus)[i]
-assign(colnames(city_bus)[i], temp)
-rm(temp)
+  colnames(temp) <- colnames(city_bus)[i]
+  assign(colnames(city_bus)[i], temp)
+  rm(temp)
 }
 ```
 
 class: center
-background-image: url("citybus.jpg")
+background-image: url("city_bus.jpg")
 # City Bus
 ---
+# Autobús y bus
+.pull-left[
+*   Anglicismo
+*   Atestado en españa en 1914
+*   Inglés *autobus* > Francés *autobus* > *omnibus*
+```{r maps-autobús, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_autobús <- cbind(word_autobús, city_bus$country)
 
-.right-column[
+autobús_map <- joinCountryData2Map(word_autobús, joinCode = "ISO3", nameJoinColumn = "city_bus$country")
+
+mapCountryData(autobús_map, nameColumnToPlot="word_autobús", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+
+```
+]
+
+.pull-right[
+*   Abreviatura de autobús (Panamá 1943)
+*   ¡Ojo! la palabra inglesa *bus* viene de la palabra francesa *omnibus*!
 ```{r maps-bus, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 word_bus <- cbind(word_bus, city_bus$country)
 
 bus_map <- joinCountryData2Map(word_bus, joinCode = "ISO3", nameJoinColumn = "city_bus$country")
 
 mapCountryData(bus_map, nameColumnToPlot="word_bus", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
-
 ```
 ]
-
 ---
-CONTINUE ADDING MAPS HERE, YOU DIDN'T EDIT THIS MAP YET.
-.right-column[
-```{r maps-various, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
-word_bus <- cbind(word_bus, city_bus$country)
+YOU STOPPED HERE, SO CONTINUE HERE page 219 in the pdf
+# Ómnibus y microbús
+.pull-left[
+*   Anglicismo
+```{r maps-ómnibus, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_ómnibus <- cbind(word_ómnibus, city_bus$country)
 
-bus_map <- joinCountryData2Map(word_bus, joinCode = "ISO3", nameJoinColumn = "city_bus$country")
+ómnibus_map <- joinCountryData2Map(word_ómnibus, joinCode = "ISO3", nameJoinColumn = "city_bus$country")
 
-mapCountryData(bus_map, nameColumnToPlot="word_bus", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+mapCountryData(ómnibus_map, nameColumnToPlot="word_ómnibus", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+
+```
+
+]
+
+.pull-right[
+```{r maps-microbús, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_microbús <- cbind(word_microbús, city_bus$country)
+
+microbús_map <- joinCountryData2Map(word_microbús, joinCode = "ISO3", nameJoinColumn = "city_bus$country")
+
+mapCountryData(microbús_map, nameColumnToPlot="word_microbús", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+
+```
+]
+---
+.pull-left[
+
+
+]
+
+.pull-right[
+```{r maps-guagua, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_guagua <- cbind(word_guagua, city_bus$country)
+
+guagua_map <- joinCountryData2Map(word_guagua, joinCode = "ISO3", nameJoinColumn = "city_bus$country")
+
+mapCountryData(guagua_map, nameColumnToPlot="word_guagua", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+
+```
+]
+---
+.pull-left[
+
+
+]
+
+.pull-right[
+```{r maps-colectivo, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_colectivo <- cbind(word_colectivo, city_bus$country)
+
+colectivo_map <- joinCountryData2Map(word_colectivo, joinCode = "ISO3", nameJoinColumn = "city_bus$country")
+
+mapCountryData(colectivo_map, nameColumnToPlot="word_colectivo", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+
+```
+]
+---
+```{r unique-words-city-bus, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+unique_words_city_bus <- city_bus %>% select(
+  country, word_bondi, word_buseta, word_camioneta, word_camión
+)
+
+unique_words_city_bus <- unique(unique_words_city_bus)
+
+rownames(unique_words_city_bus) <- unique_words_city_bus[,1]
+unique_words_city_bus[,1] <- NULL
+
+unique_words_city_bus <- unique_words_city_bus[!apply(is.na(unique_words_city_bus) | unique_words_city_bus == "", 1, all),]
+```
+
+```{r table-unique-words-city-bus, echo=FALSE, message=FALSE, warning=FALSE}
+kbl(unique_words_city_bus, col.names = NULL) %>%
+  kable_paper()
+```
+---
+```{r df-long-distance-bus, include=FALSE}
+long_distance_bus <- read.csv(
+  here(
+    "long_distance_bus.csv"
+  ), encoding = "ISO-8859-1"
+)
+
+for(i in 1:ncol(long_distance_bus)){
+  temp <- data.frame(long_distance_bus[,i])
+  colnames(temp) <- colnames(long_distance_bus)[i]
+  assign(colnames(long_distance_bus)[i], temp)
+  rm(temp)
+}
+```
+
+class: center
+background-image: url("long_distance_bus.png")
+# Long distance bus
+---
+.pull-left[
+```{r maps-bus-ld, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_bus_ld <- cbind(word_bus_ld, long_distance_bus$country)
+
+bus_map_ld <- joinCountryData2Map(word_bus_ld, joinCode = "ISO3", nameJoinColumn = "long_distance_bus$country")
+
+mapCountryData(bus_map_ld, nameColumnToPlot="word_bus_ld", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
 
 ```
 ]
 
+.pull-right[
+```{r maps-bus-repeat, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+mapCountryData(bus_map, nameColumnToPlot="word_bus", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+```
+]
+---
+.pull-left[
+```{r maps-guagua-ld, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_guagua_ld <- cbind(word_guagua_ld, long_distance_bus$country)
 
+guagua_map_ld <- joinCountryData2Map(word_guagua_ld, joinCode = "ISO3", nameJoinColumn = "long_distance_bus$country")
 
+mapCountryData(guagua_map_ld, nameColumnToPlot="word_guagua_ld", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
 
+```
+]
 
+.pull-right[
+```{r maps-guagua-repeat, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+mapCountryData(guagua_map, nameColumnToPlot="word_guagua", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+```
+]
+---
+.pull-left[
+```{r maps-colectivo-ld, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_colectivo_ld <- cbind(word_colectivo_ld, long_distance_bus$country)
 
+colectivo_map_ld <- joinCountryData2Map(word_colectivo_ld, joinCode = "ISO3", nameJoinColumn = "long_distance_bus$country")
 
+mapCountryData(colectivo_map_ld, nameColumnToPlot="word_colectivo_ld", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+
+```
+]
+
+.pull-right[
+```{r maps-colectivo-repeat, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+mapCountryData(colectivo_map, nameColumnToPlot="word_colectivo", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+```
+]
+---
+.pull-left[
+```{r maps-microbús-ld, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_microbús_ld <- cbind(word_microbús_ld, long_distance_bus$country)
+
+microbús_map_ld <- joinCountryData2Map(word_microbús_ld, joinCode = "ISO3", nameJoinColumn = "long_distance_bus$country")
+
+mapCountryData(microbús_map_ld, nameColumnToPlot="word_microbús_ld", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+
+```
+]
+
+.pull-right[
+```{r maps-microbús-repeat, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+mapCountryData(microbús_map, nameColumnToPlot="word_microbús", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+```
+]
+---
+.pull-left[
+```{r maps-ómnibus-ld, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_ómnibus_ld <- cbind(word_ómnibus_ld, long_distance_bus$country)
+
+ómnibus_map_ld <- joinCountryData2Map(word_ómnibus_ld, joinCode = "ISO3", nameJoinColumn = "long_distance_bus$country")
+
+mapCountryData(ómnibus_map_ld, nameColumnToPlot="word_ómnibus_ld", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+
+```
+]
+
+.pull-right[
+```{r maps-ómnibus-repeat, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+mapCountryData(ómnibus_map, nameColumnToPlot="word_ómnibus", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+```
+]
+---
+.pull-left[
+```{r maps-autobús-ld, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_autobús_ld <- cbind(word_autobús_ld, long_distance_bus$country)
+
+autobús_map_ld <- joinCountryData2Map(word_autobús_ld, joinCode = "ISO3", nameJoinColumn = "long_distance_bus$country")
+
+mapCountryData(autobús_map_ld, nameColumnToPlot="word_autobús_ld", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+
+```
+]
+
+.pull-right[
+```{r maps-autobús-repeat, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+mapCountryData(autobús_map, nameColumnToPlot="word_autobús", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+```
+]
+---
+.pull-left[
+```{r maps-camioneta-ld, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_camioneta_ld <- cbind(word_camioneta_ld, long_distance_bus$country)
+
+camioneta_map_ld <- joinCountryData2Map(word_camioneta_ld, joinCode = "ISO3", nameJoinColumn = "long_distance_bus$country")
+
+mapCountryData(camioneta_map_ld, nameColumnToPlot="word_camioneta_ld", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+
+```
+]
+
+.pull-right[
+```{r maps-camioneta-repeat, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_camioneta <- cbind(word_camioneta, city_bus$country)
+
+camioneta_map <- joinCountryData2Map(word_camioneta, joinCode = "ISO3", nameJoinColumn = "city_bus$country")
+
+mapCountryData(camioneta_map, nameColumnToPlot="word_camioneta", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+```
+]
+---
+.pull-left[
+```{r maps-camión-ld, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_camión_ld <- cbind(word_camión_ld, long_distance_bus$country)
+
+camión_map_ld <- joinCountryData2Map(word_camión_ld, joinCode = "ISO3", nameJoinColumn = "long_distance_bus$country")
+
+mapCountryData(camión_map_ld, nameColumnToPlot="word_camión_ld", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+
+```
+]
+
+.pull-right[
+```{r maps-camión-repeat, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_camión <- cbind(word_camión, city_bus$country)
+
+camión_map <- joinCountryData2Map(word_camión, joinCode = "ISO3", nameJoinColumn = "city_bus$country")
+
+mapCountryData(camión_map, nameColumnToPlot="word_camión", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+```
+]
+---
+.pull-left[
+
+]
+
+.pull-right[
+```{r maps-flota, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_flota <- cbind(word_flota, long_distance_bus$country)
+
+flota_map <- joinCountryData2Map(word_flota, joinCode = "ISO3", nameJoinColumn = "long_distance_bus$country")
+
+mapCountryData(flota_map, nameColumnToPlot="word_flota", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+```
+]
+---
+```{r unique-words-long-distance-bus, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+unique_words_long_distance_bus <- long_distance_bus %>% select(
+  country, word_metro, word_espreso
+)
+
+unique_words_long_distance_bus <- unique(unique_words_long_distance_bus)
+
+rownames(unique_words_long_distance_bus) <- unique_words_long_distance_bus[,1]
+unique_words_long_distance_bus[,1] <- NULL
+
+unique_words_long_distance_bus <- unique_words_long_distance_bus[!apply(is.na(unique_words_long_distance_bus) | unique_words_long_distance_bus == "", 1, all),]
+```
+
+```{r table-unique-words-long-distance-bus, echo=FALSE, message=FALSE, warning=FALSE}
+kbl(unique_words_long_distance_bus, col.names = NULL) %>%
+  kable_paper()
+```
+---
+```{r df-traffic_jam, include=FALSE}
+traffic_jam <- read.csv(
+  here(
+    "traffic_jam.csv"
+  ), encoding = "ISO-8859-1"
+)
+
+for(i in 1:ncol(traffic_jam)){
+  temp <- data.frame(traffic_jam[,i])
+  colnames(temp) <- colnames(traffic_jam)[i]
+  assign(colnames(traffic_jam)[i], temp)
+  rm(temp)
+}
+```
+
+class: center
+background-image: url("traffic_jam.jpeg")
+# Traffic jam
+---
+.pull-left[
+
+]
+
+.pull-right[
+```{r maps-embotellamiento, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_embotellamiento <- cbind(word_embotellamiento, traffic_jam$country)
+
+embotellamiento_map <- joinCountryData2Map(word_embotellamiento, joinCode = "ISO3", nameJoinColumn = "traffic_jam$country")
+
+mapCountryData(embotellamiento_map, nameColumnToPlot="word_embotellamiento", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+```
+]
+---
+.pull-left[
+
+]
+
+.pull-right[
+```{r maps-tapón, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_tapón <- cbind(word_tapón, traffic_jam$country)
+
+tapón_map <- joinCountryData2Map(word_tapón, joinCode = "ISO3", nameJoinColumn = "traffic_jam$country")
+
+mapCountryData(tapón_map, nameColumnToPlot="word_tapón", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+```
+]
+---
+.pull-left[
+
+]
+
+.pull-right[
+```{r maps-NONE, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+word_NONE <- cbind(word_NONE, traffic_jam$country)
+
+NONE_map <- joinCountryData2Map(word_NONE, joinCode = "ISO3", nameJoinColumn = "traffic_jam$country")
+
+mapCountryData(NONE_map, nameColumnToPlot="word_NONE", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
+```
+]
+---
+```{r unique-words-traffic_jam, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+unique_words_traffic_jam <- traffic_jam %>% select(
+  country, word_trancadera, word_taco, word_trancón, word_presa, word_tranque, word_trabazón, word_tranque, word_tranca
+)
+
+unique_words_traffic_jam <- unique(unique_words_traffic_jam)
+
+rownames(unique_words_traffic_jam) <- unique_words_traffic_jam[,1]
+unique_words_traffic_jam[,1] <- NULL
+
+unique_words_traffic_jam <- unique_words_traffic_jam[!apply(is.na(unique_words_traffic_jam) | unique_words_traffic_jam == "", 1, all),]
+```
+
+```{r table-unique-words-traffic_jam, echo=FALSE, message=FALSE, warning=FALSE}
+kbl(unique_words_traffic_jam, col.names = NULL) %>%
+  kable_paper()
+```
+---
