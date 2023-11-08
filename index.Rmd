@@ -164,9 +164,9 @@ background-image: url("city_bus.jpg")
 ---
 # Autobús y bus
 .pull-left[
-*   Anglicismo
-*   Atestado en españa en 1914
-*   Inglés *autobus* > Francés *autobus* > *omnibus*
+*   Galicismo
+*   Atestado en España en 1914
+*   Español *autobús* < Francés *autobus*
 ```{r maps-autobús, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 word_autobús <- cbind(word_autobús, city_bus$country)
 
@@ -178,8 +178,8 @@ mapCountryData(autobús_map, nameColumnToPlot="word_autobús", catMethod = "cate
 ]
 
 .pull-right[
-*   Abreviatura de autobús (Panamá 1943)
-*   ¡Ojo! la palabra inglesa *bus* viene de la palabra francesa *omnibus*!
+*   Abreviatura del inglés *autobús* (Panamá 1943)
+*   ¡Ojo! La palabra inglesa *bus* viene de la palabra francesa *omnibus*, no *autobus*
 ```{r maps-bus, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 word_bus <- cbind(word_bus, city_bus$country)
 
@@ -189,10 +189,9 @@ mapCountryData(bus_map, nameColumnToPlot="word_bus", catMethod = "categorical", 
 ```
 ]
 ---
-YOU STOPPED HERE, SO CONTINUE HERE page 219 in the pdf
 # Ómnibus y microbús
 .pull-left[
-*   Anglicismo
+*   Galicismo
 ```{r maps-ómnibus, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 word_ómnibus <- cbind(word_ómnibus, city_bus$country)
 
@@ -203,7 +202,7 @@ mapCountryData(ómnibus_map, nameColumnToPlot="word_ómnibus", catMethod = "cate
 ```
 
 ]
-
+* Una palabra más recien, atestada en 1968
 .pull-right[
 ```{r maps-microbús, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 word_microbús <- cbind(word_microbús, city_bus$country)
@@ -216,8 +215,10 @@ mapCountryData(microbús_map, nameColumnToPlot="word_microbús", catMethod = "ca
 ]
 ---
 .pull-left[
-
-
+* Se usa también en las Islas Canarias
+* Se origina en Cuba para llamar a los carros arrastrados por caballos (1895)
+* Puede que venga de la palabra inglesa *wagon*...
+* ... o del ruido de la suspensión del bús 
 ]
 
 .pull-right[
@@ -232,7 +233,9 @@ mapCountryData(guagua_map, nameColumnToPlot="word_guagua", catMethod = "categori
 ]
 ---
 .pull-left[
-
+* Los taxistas en Buenos Aires perdían cada vez más clientes con las invenciones del metro y un sistema de carros (trolley cars)
+* Empezaron a tomar rutas fijas por un precio reducido --> *taxis colectivos*
+* Fue muy rentable, así que muchas empresas empezaron a crear más rutas y usar vehículos cada vez más grande (1935)
 
 ]
 
@@ -264,6 +267,10 @@ unique_words_city_bus <- unique_words_city_bus[!apply(is.na(unique_words_city_bu
 kbl(unique_words_city_bus, col.names = NULL) %>%
   kable_paper()
 ```
+*   *bondi* (1931)
+  *   Un servicio de carritos en Rio de Janeiro se abrió (1876), financiado por una empresa americana a través de "bonds"
+  *   Lusófonos utilizaron la palabra bonde [bónʤi] para referirse a los carros individuales
+  *   Luego, se extendió a los buses urbanos
 ---
 ```{r df-long-distance-bus, include=FALSE}
 long_distance_bus <- read.csv(
@@ -279,10 +286,14 @@ for(i in 1:ncol(long_distance_bus)){
   rm(temp)
 }
 ```
-
 class: center
 background-image: url("long_distance_bus.png")
 # Long distance bus
+---
+* Hay poca variación entre *city bus* y *long-distance bus*
+* Unas opciones para aclarar:
+  * bus urbano o de ciudad vs bus interprovincial o de ruta
+  * grande, ejecutivo, intermunicipal, interdepartamental, de larga distancia, de largo trayecto, de lujo, de turismo...
 ---
 .pull-left[
 ```{r maps-bus-ld, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
@@ -294,7 +305,6 @@ mapCountryData(bus_map_ld, nameColumnToPlot="word_bus_ld", catMethod = "categori
 
 ```
 ]
-
 .pull-right[
 ```{r maps-bus-repeat, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 mapCountryData(bus_map, nameColumnToPlot="word_bus", catMethod = "categorical", missingCountryCol = gray(.8), colourPalette = c("red", "blue"), mapRegion="latin america")
@@ -429,7 +439,9 @@ mapCountryData(camión_map, nameColumnToPlot="word_camión", catMethod = "catego
 ]
 ---
 .pull-left[
-
+* Atestado en 1260
+* Francés *flotte* < nórdico antiguo *floti* "squadron, fleet" < *fljôta* "float"
+* La referencia a vehículos aquaticos se extendió a vehículos terrestes
 ]
 
 .pull-right[
@@ -474,13 +486,13 @@ for(i in 1:ncol(traffic_jam)){
   rm(temp)
 }
 ```
-
 class: center
 background-image: url("traffic_jam.jpeg")
 # Traffic jam
 ---
 .pull-left[
-
+*   La palabra más común
+*   < *embotellar* < *botella* ~ "bottleneck"
 ]
 
 .pull-right[
@@ -494,7 +506,7 @@ mapCountryData(embotellamiento_map, nameColumnToPlot="word_embotellamiento", cat
 ]
 ---
 .pull-left[
-
+*   < *tapón* < Francés *tapon* < Franco **tappo*
 ]
 
 .pull-right[
@@ -508,7 +520,27 @@ mapCountryData(tapón_map, nameColumnToPlot="word_tapón", catMethod = "categori
 ]
 ---
 .pull-left[
+*   < *atascar* "to obstruct" < *tascar* el proceso de moler lino para quitarle fibras del tallo < céltico *taskos* "peg, stake, club"
+]
 
+.pull-right[
+```{r maps-atasco, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+theCountries <- c("ESP")
+
+malDF <- data.frame(country = c("ESP"),
+  atasco = c("atasco"))
+
+malMap <- joinCountryData2Map(malDF, joinCode = "ISO3",
+  nameJoinColumn = "country")
+
+mapCountryData(malMap, nameColumnToPlot="atasco", catMethod = "categorical",
+  missingCountryCol = gray(.8), mapRegion = "europe")
+
+```
+]
+---
+.pull-left[
+*   Daban palabras como "congestión" o "congestionamiento", pero no quiere decir exactamente "traffic jam", sino un fenoméno más generalizado
 ]
 
 .pull-right[
@@ -538,4 +570,11 @@ unique_words_traffic_jam <- unique_words_traffic_jam[!apply(is.na(unique_words_t
 kbl(unique_words_traffic_jam, col.names = NULL) %>%
   kable_paper()
 ```
----
+*   *trancar* "obstruct, to bar the door" (1540) < *tranca* (c1330) un pedazo de madera para cerrar la puerta < Céltico *tranca* < *taranca* "asador"
+*   *trabazón* < *trabar* "to hobble" < *traba* "hobble" < Español medioeval *trabe* < Latino *trabem* pedazo de madera para mantener animales, como caballos, juntos
+* *taco* < Francés antiguo *tache* "flecha" < Bajo alemán medio *zacke* "punto afilado"
+  *   *taco* originalmente quería decir "flecha", pero se extendió al *papel* que separaba el polvo de la bola del arma
+  *   A través de metáfora, llegamos a la comida que conocemos hoy
+  *   En Chile, la metáfora se extiende a tubos atascados y al tráfico (atestado 1998)
+*   *presa* (atestado 1993) < latín *prensa* < *prendere* "agarrar"
+  *   presa = "dam"
