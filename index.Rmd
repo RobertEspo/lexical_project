@@ -50,6 +50,10 @@ class: center
 background-image: url("minivan.jpg")
 # Minivan
 ---
+# Minivan
+
+¿Cuales son las palabras que conocen ustedes para esta palabra en español?
+---
 # Van y miniván
 .pull-left[
 *   Anglicismo, atestado en Puerto Rico en 1997
@@ -161,6 +165,10 @@ for(i in 1:ncol(city_bus)){
 class: center
 background-image: url("city_bus.jpg")
 # City Bus
+---
+# City bus
+
+¿Cuales son las palabras que conocen ustedes para esta palabra en español?
 ---
 # Autobús y bus
 .pull-left[
@@ -289,6 +297,10 @@ for(i in 1:ncol(long_distance_bus)){
 class: center
 background-image: url("long_distance_bus.png")
 # Long distance bus
+---
+# Long distance bus
+
+¿Cuales son las palabras que conocen ustedes para esta palabra en español?
 ---
 * Hay poca variación entre *city bus* y *long-distance bus*
 * Unas opciones para aclarar:
@@ -489,6 +501,10 @@ for(i in 1:ncol(traffic_jam)){
 class: center
 background-image: url("traffic_jam.jpeg")
 # Traffic jam
+---
+# Traffic jam
+
+¿Cuales son las palabras que conocen ustedes para esta palabra en español?
 ---
 .pull-left[
 *   La palabra más común
