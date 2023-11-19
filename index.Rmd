@@ -1,9 +1,8 @@
 ---
 title: "Presentación Léxica"
-subtitle: ""
+subtitle: "Language Variation in the Spanish-speaking World"
 author: "Robert Esposito"
 institute: "Rutgers University"
-date: "2016/12/12 (updated: `r Sys.Date()`)"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -594,3 +593,9 @@ kbl(unique_words_traffic_jam, col.names = NULL) %>%
   *   En Chile, la metáfora se extiende a tubos atascados y al tráfico (atestado 1998)
 *   *presa* (atestado 1993) < latín *prensa* < *prendere* "agarrar"
   *   presa = "dam"
+---
+.middle[
+.center[
+# ¡Gracias!
+]
+]
